@@ -1,4 +1,5 @@
 ﻿using BloggerApp.Models;
+using BloggerApp.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,25 +8,30 @@ using System.Threading.Tasks;
 
 namespace BloggerApp.Services;
 
-public class BlogService
+public class BlogService  
 {
-    private Post? _post;
+    private PostRepository _repository;
+
+    public BlogService(PostRepository repository)
+    {
+        _repository = repository;
+    }
 
     public void CreatePost(Post post)
     {
-        _post = post;
+        if (post.Author == null) { return; }
+        _repository.CreatePost( post);
     }
     public Post ReadPost() {
-        return _post ?? new Post();
+        return _repository.ReadPost();
     }
+
     public void UpdatePost(Post post)
     {
-        _post = post;
+        _repository.UpdatePost(post);
     }
     
     public void DeletePost() {
-        _post = null;
+       _repository.DeletePost();
     }
-
-
 }

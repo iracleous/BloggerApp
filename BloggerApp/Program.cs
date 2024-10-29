@@ -1,4 +1,5 @@
 ﻿using BloggerApp.Models;
+using BloggerApp.Repositories;
 using BloggerApp.Services;
 
 Post post = new NewsPost {
@@ -13,3 +14,7 @@ Post post = new NewsPost {
 
 var daysElapsed = BlogHandler.DaysElapsed(post);
 Console.WriteLine(daysElapsed.ToString());
+
+PostRepository postRepository = new PostRepository();
+BlogService blogService = new BlogService(postRepository);
+blogService.CreatePost(post);
