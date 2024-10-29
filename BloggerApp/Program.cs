@@ -10,21 +10,6 @@ Post post = new NewsPost {
     Author = new Author { Name = "Dimitris" }
 };
 
-var blogService = new BlogService { };
-blogService.CreatePost(post);
 
-Console.WriteLine(blogService.ReadPost());
-int days = BlogHandler.DaysElapsed(post);
-
-
-Console.WriteLine(days);
-try {Console.WriteLine($"the lenght of the name of the post is {post.Author.Length}"); }
-  catch(Exception ex) {Console.WriteLine("error");}
-
-
-Console.WriteLine("end");
-
-Guid guid = Guid.NewGuid();
-
-
-Console.WriteLine(guid);
+var daysElapsed = BlogHandler.DaysElapsed(post);
+Console.WriteLine(daysElapsed.ToString());

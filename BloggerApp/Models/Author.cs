@@ -10,4 +10,5 @@ public class Author
 {
     public long Id { get; set; }
     public string Name { get; set; } = string.Empty;
+    public Post Post { get; set; }  
 }

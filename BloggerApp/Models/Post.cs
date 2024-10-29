@@ -15,7 +15,7 @@ public class Post
     public string Description { get; set; } = string.Empty;
     public Author Author { get; set; } = new Author();
     public string Content { get; set; } = string.Empty;
-    public DateTime Created { get; set; }
+    public DateTime Created { get; set; } = DateTime.Now;
     public DateTime Updated { get; set; }
     public decimal Balance { get; set; }
     public double Amount { get; set; }
