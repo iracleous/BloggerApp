@@ -42,5 +42,15 @@ public  class ListManipulation
              .ToList();
     }
 
+    public List<string> GetAuthorStartingFrom(string query)
+    {
+        return data
+             .Where(author => author.Name.StartsWith(query))
+             .Select(author =>author.Name)
+             .OrderBy(name => name)
+             .Distinct()
+             .ToList();
+    }
+
 
 }

@@ -29,3 +29,10 @@ ListManipulation listManipulation = new ListManipulation();
 listManipulation
     .CountAuthorCities()
     .ForEach(analysis => Console.WriteLine($"{analysis.CityName},{analysis.Count}"));
+
+
+
+Console.WriteLine("--------------------------------");
+
+List<string> names = listManipulation.GetAuthorStartingFrom("D");
+names.ForEach(name => Console.WriteLine(name));
