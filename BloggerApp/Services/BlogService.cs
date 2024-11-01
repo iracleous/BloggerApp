@@ -1,4 +1,5 @@
-﻿using BloggerApp.Models;
+﻿using BloggerApp.Dtos;
+using BloggerApp.Models;
 using BloggerApp.Repositories;
 using System;
 using System.Collections.Generic;
@@ -8,30 +9,34 @@ using System.Threading.Tasks;
 
 namespace BloggerApp.Services;
 
-public class BlogService  
+public class BlogService : IBlogService
 {
-    private PostRepository _repository;
+    private readonly IRepository<Post, int> _postRepository;
 
-    public BlogService(PostRepository repository)
+    public BlogService(IRepository<Post, int> postRepository)
     {
-        _repository = repository;
-    }
-
-    public void CreatePost(Post post)
-    {
-        if (post.Author == null) { return; }
-        _repository.CreatePost( post);
-    }
-    public Post ReadPost() {
-        return _repository.ReadPost();
+        _postRepository = postRepository;
     }
 
-    public void UpdatePost(Post post)
+    public Post? CreatePost(PostDto post)
     {
-        _repository.UpdatePost(post);
+        if (post == null) { return null; }
+        if (!post.Title.Contains("technology")  ) { return null; }
+        if (post.Description.Length>100) post.Description = post.Description.Substring(0,100); 
+
+        return 
+            _postRepository.Create(
+                new Post { Title= post.Title, Description=post.Description, Author = post.Author}
+                );
     }
-    
-    public void DeletePost() {
-       _repository.DeletePost();
+
+    public Post? FindById(int id)
+    {
+        return _postRepository.Get(id);
+    }
+
+    public List<Post> GetAllPost()
+    {
+        return _postRepository.Get().ToList();
     }
 }

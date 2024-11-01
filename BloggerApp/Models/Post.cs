@@ -18,5 +18,5 @@ public class Post
     public DateTime Updated { get; set; }
     public decimal Balance { get; set; }
     public double Amount { get; set; }
-    public Author Author { get; set; } = new Author();
+    public string Author { get; set; } = string.Empty;
 }

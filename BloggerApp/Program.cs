@@ -1,20 +1,22 @@
-﻿using BloggerApp.Models;
+﻿using BloggerApp.Dtos;
+using BloggerApp.Models;
 using BloggerApp.Repositories;
 using BloggerApp.Services;
 
-Post post = new NewsPost {
-    Title = "This is my post",
+PostDto post = new PostDto
+{
+    Title = "This is my post about technology",
     Description = "This is the description of the post",
-    Created = DateTime.Now,
-    Id = 300,
-    Amount = 10,
-    Author = new Author { Name = "Dimitris" }
+    Author = "Dimitris" 
 };
 
 
-var daysElapsed = BlogHandler.DaysElapsed(post);
-Console.WriteLine(daysElapsed.ToString());
-
-PostRepository postRepository = new PostRepository();
+IRepository<Post,int> postRepository = new PostRepository();
 BlogService blogService = new BlogService(postRepository);
 blogService.CreatePost(post);
+blogService.CreatePost(post);
+blogService.CreatePost(post);
+
+
+blogService.GetAllPost().ForEach( post => Console.WriteLine(
+    $"{post.Id},{post.Created},{post.Title},{post.Author}"));
