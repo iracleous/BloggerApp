@@ -20,3 +20,12 @@ blogService.CreatePost(post);
 
 blogService.GetAllPost().ForEach( post => Console.WriteLine(
     $"{post.Id},{post.Created},{post.Title},{post.Author}"));
+
+
+
+
+Console.WriteLine("--------------------------------");
+ListManipulation listManipulation = new ListManipulation();
+listManipulation
+    .CountAuthorCities()
+    .ForEach(analysis => Console.WriteLine($"{analysis.CityName},{analysis.Count}"));
