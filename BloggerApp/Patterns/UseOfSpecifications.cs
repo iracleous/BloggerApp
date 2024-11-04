@@ -9,7 +9,7 @@ namespace BloggerApp.Patterns;
 
 public class UseOfSpecifications
 {
-    public void UsingSpecifications()
+    public static void UsingSpecifications()
     {
         var products = new List<Product>
         {

@@ -42,3 +42,6 @@ names.ForEach(name => Console.WriteLine(name));
 Console.WriteLine("--------------------------------");
 Singleton singleton =   Singleton.GetInstance();
 singleton.DoWork();
+
+Console.WriteLine("--------------------------------");
+UseOfSpecifications.UsingSpecifications();
