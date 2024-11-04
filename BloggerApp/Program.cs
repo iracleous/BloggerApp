@@ -1,5 +1,6 @@
 ﻿using BloggerApp.Dtos;
 using BloggerApp.Models;
+using BloggerApp.Patterns;
 using BloggerApp.Repositories;
 using BloggerApp.Services;
 
@@ -36,3 +37,8 @@ Console.WriteLine("--------------------------------");
 
 List<string> names = listManipulation.GetAuthorStartingFrom("D");
 names.ForEach(name => Console.WriteLine(name));
+
+
+Console.WriteLine("--------------------------------");
+Singleton singleton =   Singleton.GetInstance();
+singleton.DoWork();
