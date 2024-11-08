@@ -1,10 +1,9 @@
 @BlogApi_HostAddress = https://localhost:7147
 
-GET {{BlogApi_HostAddress}}/api/Posts/
+GET {{BlogApi_HostAddress}}/api/Posts?pageCount=1&pageSize=1
 Accept: application/json
 
 ###
-
 
 POST {{BlogApi_HostAddress}}/api/Posts/
 Content-Type: application/json
@@ -26,3 +25,9 @@ Accept: application/json
 
 DELETE {{BlogApi_HostAddress}}/api/Posts/1
 Accept: application/json
+
+###
+
+PUT {{BlogApi_HostAddress}}/api/Posts/
+Content-Type: application/json
+

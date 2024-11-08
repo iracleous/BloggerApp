@@ -23,9 +23,14 @@ namespace BlogApi.Controllers
 
         // GET: api/Posts
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Post>>> GetPosts()
+        public async Task<ActionResult<IEnumerable<Post>>> GetPosts(
+            [FromQuery] int pageCount,
+            [FromQuery] int pageSize)
         {
-            return await _context.Posts.ToListAsync();
+            return await _context.Posts
+                .Skip((pageCount-1)*pageSize)
+                .Take(pageSize)
+                .ToListAsync();
         }
 
         // GET: api/Posts/5
@@ -45,7 +50,7 @@ namespace BlogApi.Controllers
         // PUT: api/Posts/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutPost(int id, Post post)
+        public async Task<IActionResult> PutPost([FromRoute] int id, [FromBody] Post post)
         {
             if (id != post.Id)
             {
