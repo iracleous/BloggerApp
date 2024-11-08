@@ -10,7 +10,7 @@ namespace BloggerApp.Services;
 
 public interface IBlogService
 {
-    Post? FindById(int id);
-    List<Post> GetAllPost();
-    Post? CreatePost(PostDto post);
+    Task<Post?> FindByIdAsync(int id);
+    Task<List<Post>> GetAllPostAsync();
+    Task<Post?> CreatePostAsync(PostDto post);
 }
