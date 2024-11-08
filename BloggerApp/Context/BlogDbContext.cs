@@ -7,7 +7,9 @@ public class BlogDbContext : DbContext
 {
     public DbSet<Post> Posts { get; set; }
 
-
+    public BlogDbContext(DbContextOptions<BlogDbContext> options): base(options)
+    {
+    }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {

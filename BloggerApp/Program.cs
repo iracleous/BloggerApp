@@ -12,7 +12,7 @@ PostDto post = new PostDto
     Author = "Dimitris" 
 };
 
-BlogDbContext blogDbContext = new BlogDbContext();
+BlogDbContext blogDbContext = new BlogDbContext(null);
 
 IRepository<Post,int> postRepository = new PostRepository(blogDbContext);
 BlogService blogService = new BlogService(postRepository);
