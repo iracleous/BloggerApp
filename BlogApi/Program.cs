@@ -1,4 +1,7 @@
 using BloggerApp.Context;
+using BloggerApp.Models;
+using BloggerApp.Repositories;
+using BloggerApp.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,6 +15,11 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<BlogDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))); ;
+
+
+builder.Services.AddScoped<IBlogService, BlogService>();
+builder.Services.AddScoped<IRepository<Post,int>, PostRepository>();
+
 
 var app = builder.Build();
 
