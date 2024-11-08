@@ -1,11 +1,7 @@
 ﻿using BloggerApp.Dtos;
 using BloggerApp.Models;
 using BloggerApp.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Collections.Immutable;
 
 namespace BloggerApp.Services;
 
@@ -18,25 +14,25 @@ public class BlogService : IBlogService
         _postRepository = postRepository;
     }
 
-    public Post? CreatePost(PostDto post)
+    public async Task<Post?> CreatePostAsync(PostDto post)
     {
         if (post == null) { return null; }
         if (!post.Title.Contains("technology")  ) { return null; }
         if (post.Description.Length>100) post.Description = post.Description.Substring(0,100); 
 
         return 
-            _postRepository.Create(
+            await _postRepository.CreateAsync(
                 new Post { Title= post.Title, Description=post.Description, Author = post.Author}
                 );
     }
 
-    public Post? FindById(int id)
+    public async Task<Post?> FindByIdAsync(int id)
     {
-        return _postRepository.Get(id);
+        return await _postRepository.GetAsync(id);
     }
 
-    public List<Post> GetAllPost()
+    public async Task<List<Post>> GetAllPostAsync(int pageCount, int pageSize)
     {
-        return _postRepository.Get().ToList();
+        return await  _postRepository.GetAsync(pageCount, pageSize);
     }
 }

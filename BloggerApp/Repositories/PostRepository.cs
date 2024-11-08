@@ -1,53 +1,66 @@
-﻿using BloggerApp.Models;
-using System;
-using System.Collections.Generic;
+﻿using BloggerApp.Context;
+using BloggerApp.Models;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Immutable;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BloggerApp.Repositories;
 
 public class PostRepository : IRepository<Post, int>
 {
-    private readonly List<Post> posts = [];
-    private int indexer = 0;
+    private readonly BlogDbContext _dbContext;
 
-    public Post? Create(Post post)
+    public PostRepository(BlogDbContext dbContext)
     {
-        posts.Add(post);
-        indexer++;
-        post.Id = indexer;
+        _dbContext = dbContext;
+    }
+
+    public async Task<Post?> CreateAsync(Post post)
+    {
+        _dbContext.Posts.Add(post);
+        await _dbContext.SaveChangesAsync();
         return post;
     }
 
-    public bool Delete(int id)
+    public async Task<bool> DeleteAsync(int id)
     {
-        Post? post = Get(id);
+        Post? post = await GetAsync(id);
         if (post == null)
             return false;
-        posts.Remove(post);
+        _dbContext
+            .Posts
+            .Remove(post);
+        await _dbContext.SaveChangesAsync();
         return true;
     }
      
-    public Post? Get(int id)
+    public async Task<Post?> GetAsync(int id)
     {
-        return posts
-             .FirstOrDefault(post => post.Id == id);
+        return await  _dbContext
+            .Posts
+            .FirstOrDefaultAsync(post => post.Id == id);
     }
 
-    public ImmutableList<Post> Get()
+    public async Task<List<Post>> GetAsync(int pageCount, int pageSize)
     {
-       return  ImmutableList.Create(posts.ToArray());
+        if(pageCount <= 0)
+            pageCount = 1;
+        if(pageSize <= 0 || pageSize>20)
+            pageSize = 10;
+        return await
+                _dbContext
+                .Posts
+                .Skip((pageCount - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
     }
 
-    public Post? Update(Post post)
+    public async Task<Post?> UpdateAsync(Post post)
     {
-        Post? postDb = Get(post.Id);
-        if (postDb == null)
-            return null;
+        Post? postDb = await GetAsync(post.Id);
         postDb.Description = post.Description;
         postDb.Title = post.Title;
+        _dbContext.Posts.Update(postDb);
+        await _dbContext.SaveChangesAsync();
         return postDb;
     }
 }

@@ -1,4 +1,5 @@
-﻿using BloggerApp.Dtos;
+﻿using BloggerApp.Context;
+using BloggerApp.Dtos;
 using BloggerApp.Models;
 using BloggerApp.Patterns;
 using BloggerApp.Repositories;
@@ -11,15 +12,16 @@ PostDto post = new PostDto
     Author = "Dimitris" 
 };
 
+BlogDbContext blogDbContext = new BlogDbContext();
 
-IRepository<Post,int> postRepository = new PostRepository();
+IRepository<Post,int> postRepository = new PostRepository(blogDbContext);
 BlogService blogService = new BlogService(postRepository);
-blogService.CreatePost(post);
-blogService.CreatePost(post);
-blogService.CreatePost(post);
+await blogService.CreatePostAsync(post);
 
 
-blogService.GetAllPost().ForEach( post => Console.WriteLine(
+
+var pages = await blogService.GetAllPostAsync(1, 10);
+    pages.ForEach( post => Console.WriteLine(
     $"{post.Id},{post.Created},{post.Title},{post.Author}"));
 
 

@@ -1,14 +1,4 @@
-﻿using BloggerApp.Models;
-using System;
-using System.Collections.Generic;
-using System.Collections.Immutable;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BloggerApp.Repositories;
-
-
+﻿namespace BloggerApp.Repositories;
 
 /// <summary>
 /// This is the generic repository  
@@ -16,9 +6,9 @@ namespace BloggerApp.Repositories;
 /// </summary>
 public interface IRepository<T,K> where T : class
 {
-    T? Create(T t);
-    T? Update(T t);
-    bool Delete(K id); 
-    T? Get(K id);
-    ImmutableList<T> Get();  
+    Task<T?> CreateAsync(T t);
+    Task<T?> UpdateAsync(T t);
+    Task<bool> DeleteAsync(K id); 
+    Task<T?> GetAsync(K id);
+    Task<List<T>> GetAsync(int pageCount, int pageSize);  
 }
