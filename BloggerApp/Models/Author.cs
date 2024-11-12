@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BloggerApp.Models;
+﻿namespace BlogDomain.Models;
 
 public class Author
 {
     public long Id { get; set; }
     public string Name { get; set; } = string.Empty;
-    public Post Post { get; set; }  
-    public string Address { get; set; }
+    public string Email { get; set; } = string.Empty;
+    public string Address { get; set; } = string.Empty;
+    public AuthorType AuthorType { get; set; }
+    public virtual List<Blog> Blogs { get; set; } = [];
 }

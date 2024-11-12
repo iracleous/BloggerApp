@@ -1,11 +1,11 @@
-﻿using BloggerApp.Models;
+﻿using BlogDomain.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BloggerApp.Patterns;
+namespace BlogDomain.Patterns;
 
 public class PriceSpecification : Specification<Product>
 {

@@ -1,5 +1,6 @@
-using BloggerApp.Models;
-using BloggerApp.Services;
+
+using BlogDomain.Models;
+using BlogDomain.Services;
 
 namespace TestBlogger;
 

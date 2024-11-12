@@ -7,9 +7,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlogDomain", "BloggerApp\Bl
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestBlogger", "TestBlogger\TestBlogger.csproj", "{DD1A56EC-0747-42FC-A722-1530738124ED}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlogApi", "BlogApi\BlogApi.csproj", "{AD0C2C3C-32F6-4C19-9386-F7226F69CDA8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlogApi", "BlogApi\BlogApi.csproj", "{AD0C2C3C-32F6-4C19-9386-F7226F69CDA8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlogReader", "BlogReader\BlogReader.csproj", "{00E3AD12-5854-4544-87B3-28D5ED9F6C5C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlogReader", "BlogReader\BlogReader.csproj", "{00E3AD12-5854-4544-87B3-28D5ED9F6C5C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{CF9A2C6B-5EA9-4196-96E1-2595F0A6F4F7}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

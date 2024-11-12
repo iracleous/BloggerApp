@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BloggerApp.Patterns;
+namespace BlogDomain.Patterns;
 
 public abstract class Specification<T> : ISpecification<T>
 {

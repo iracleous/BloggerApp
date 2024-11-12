@@ -4,9 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BloggerApp.Models;
+namespace BlogDomain.Patterns;
+
+public class Post
+{
+}
 
 public class NewsPost : Post
 {
-    public string NewsDetails { get; set; } = string.Empty;
+
 }

@@ -1,6 +1,8 @@
-﻿using BloggerApp.Models;
+﻿
 
-namespace BloggerApp.Services;
+using BlogDomain.Models;
+
+namespace BlogDomain.Services;
 
 public static class BlogHandler
 {

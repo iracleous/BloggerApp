@@ -1,4 +1,4 @@
-﻿namespace BloggerApp.Repositories;
+﻿namespace BlogDomain.Repositories;
 
 /// <summary>
 /// This is the generic repository  

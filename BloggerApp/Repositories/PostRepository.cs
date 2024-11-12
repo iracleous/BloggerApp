@@ -1,11 +1,12 @@
-﻿using BloggerApp.Context;
-using BloggerApp.Models;
-using Microsoft.EntityFrameworkCore;
-using System.Collections.Immutable;
+﻿
 
-namespace BloggerApp.Repositories;
+using BlogDomain.Models;
+using BlogDomain.Context;
 
-public class PostRepository : IRepository<Post, int>
+namespace BlogDomain.Repositories;
+
+
+public class PostRepository : IRepository<Post, long>
 {
     private readonly BlogDbContext _dbContext;
 
@@ -14,53 +15,28 @@ public class PostRepository : IRepository<Post, int>
         _dbContext = dbContext;
     }
 
-    public async Task<Post?> CreateAsync(Post post)
+    public Task<Post?> CreateAsync(Post t)
     {
-        _dbContext.Posts.Add(post);
-        await _dbContext.SaveChangesAsync();
-        return post;
+        throw new NotImplementedException();
     }
 
-    public async Task<bool> DeleteAsync(int id)
+    public Task<bool> DeleteAsync(long id)
     {
-        Post? post = await GetAsync(id);
-        if (post == null)
-            return false;
-        _dbContext
-            .Posts
-            .Remove(post);
-        await _dbContext.SaveChangesAsync();
-        return true;
-    }
-     
-    public async Task<Post?> GetAsync(int id)
-    {
-        return await  _dbContext
-            .Posts
-            .FirstOrDefaultAsync(post => post.Id == id);
+        throw new NotImplementedException();
     }
 
-    public async Task<List<Post>> GetAsync(int pageCount, int pageSize)
+    public Task<Post?> GetAsync(long id)
     {
-        if(pageCount <= 0)
-            pageCount = 1;
-        if(pageSize <= 0 || pageSize>20)
-            pageSize = 10;
-        return await
-                _dbContext
-                .Posts
-                .Skip((pageCount - 1) * pageSize)
-                .Take(pageSize)
-                .ToListAsync();
+        throw new NotImplementedException();
     }
 
-    public async Task<Post?> UpdateAsync(Post post)
+    public Task<List<Post>> GetAsync(int pageCount, int pageSize)
     {
-        Post? postDb = await GetAsync(post.Id);
-        postDb.Description = post.Description;
-        postDb.Title = post.Title;
-        _dbContext.Posts.Update(postDb);
-        await _dbContext.SaveChangesAsync();
-        return postDb;
+        throw new NotImplementedException();
+    }
+
+    public Task<Post?> UpdateAsync(Post t)
+    {
+        throw new NotImplementedException();
     }
 }

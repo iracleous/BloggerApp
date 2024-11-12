@@ -1,13 +1,14 @@
-﻿using BloggerApp.Dtos;
-using BloggerApp.Models;
-using BloggerApp.Repositories;
+﻿
+using BlogDomain.Dtos;
+using BlogDomain.Models;
+using BlogDomain.Repositories;
 
-namespace BloggerApp.Services;
+namespace BlogDomain.Services;
 
 /// <summary>
 /// 
 /// </summary>
-public class BlogService : IBlogService
+public class BlogService : IPostService
 {
     private readonly IRepository<Post, int> _postRepository;
 
@@ -16,25 +17,28 @@ public class BlogService : IBlogService
         _postRepository = postRepository;
     }
 
-    public async Task<Post?> CreatePostAsync(PostDto post)
+    public Task<PostResponseDto?> CreatePostAsync(PostRequestDto post)
     {
-        if (post == null) { return null; }
-        if (!post.Title.Contains("technology")  ) { return null; }
-        if (post.Description.Length>100) post.Description = post.Description.Substring(0,100); 
-
-        return 
-            await _postRepository.CreateAsync(
-                new Post { Title= post.Title, Description=post.Description, Author = post.Author}
-                );
+        throw new NotImplementedException();
     }
 
-    public async Task<Post?> FindByIdAsync(int id)
+    public Task<bool> DeleteByIdAsync(long id)
     {
-        return await _postRepository.GetAsync(id);
+        throw new NotImplementedException();
     }
 
-    public async Task<List<Post>> GetAllPostAsync(int pageCount, int pageSize)
+    public Task<PostResponseDto?> FindByIdAsync(long id)
     {
-        return await  _postRepository.GetAsync(pageCount, pageSize);
+        throw new NotImplementedException();
+    }
+
+    public Task<List<PostResponseDto>> GetAllPostAsync()
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<PostResponseDto?> UpdatePostAsync(long id, PostRequestDto post)
+    {
+        throw new NotImplementedException();
     }
 }

@@ -1,11 +1,8 @@
-﻿using BloggerApp.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 
-namespace BloggerApp.Services;
+using BlogDomain.Models;
+
+namespace BlogDomain.Services;
 
 public class Analysis
 {

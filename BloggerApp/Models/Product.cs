@@ -1,4 +1,4 @@
-﻿namespace BloggerApp.Models;
+﻿namespace BlogDomain.Models;
 /// <summary>
 /// Model class of the product
 /// </summary>

@@ -1,4 +1,5 @@
-﻿using BloggerApp.Models;
+﻿
+using BlogDomain.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
 
