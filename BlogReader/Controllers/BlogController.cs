@@ -1,4 +1,5 @@
 ﻿
+using BlogDomain.Dtos;
 using BlogDomain.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
@@ -19,12 +20,32 @@ public class BlogController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<List<Post>>> GetPostsAsync()
+    public async Task<ActionResult<List<PostResponseDto>>> GetPostsAsync()
     {
-        HttpResponseMessage httpMessage = await _httpClient.GetAsync($"https://localhost:7147/api/posts");
+        string url = $"https://localhost:7147/api/post";
+        HttpResponseMessage httpMessage = await _httpClient.GetAsync(url);
      httpMessage.EnsureSuccessStatusCode();
      string responseBody = await httpMessage.Content.ReadAsStringAsync();
-     List<Post>? posts =  JsonSerializer.Deserialize<List<Post>>(responseBody);
+
+        var options = new JsonSerializerOptions
+        {
+            PropertyNameCaseInsensitive = true
+        };
+        List<PostResponseDto>? posts = JsonSerializer.Deserialize<List<PostResponseDto>>(responseBody, options);
+
+         
      return Ok(posts);
     }
+
+    [HttpPost]
+    public async Task<ActionResult<Post>> CreatePostAsync(PostRequestDto post)
+    {
+        string url = $"https://localhost:7147/api/post";
+        HttpResponseMessage httpMessage = await _httpClient.PostAsJsonAsync(url, post);
+        httpMessage.EnsureSuccessStatusCode();
+        string responseBody = await httpMessage.Content.ReadAsStringAsync();
+        Post? posted = JsonSerializer.Deserialize<Post>(responseBody);
+        return Ok(posted);
+    }
+
 }

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BlogDomain.Migrations
 {
     [DbContext(typeof(BlogDbContext))]
-    [Migration("20241112104411_M1")]
+    [Migration("20241113112043_M1")]
     partial class M1
     {
         /// <inheritdoc />
@@ -77,11 +77,11 @@ namespace BlogDomain.Migrations
 
             modelBuilder.Entity("BlogDomain.Models.Post", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("bigint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
                     b.Property<long?>("BlogId")
                         .HasColumnType("bigint");

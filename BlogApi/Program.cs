@@ -17,7 +17,7 @@ builder.Services.AddDbContext<BlogDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))); ;
 
 
-builder.Services.AddScoped<IPostService, BlogService>();
+builder.Services.AddScoped<IPostService, PostService>();
 builder.Services.AddScoped<IRepository<Post,long>, PostRepository>();
 
 

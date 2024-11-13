@@ -2,9 +2,9 @@
 
 using BlogDomain.Models;
 using BlogDomain.Context;
+using Microsoft.EntityFrameworkCore;
 
 namespace BlogDomain.Repositories;
-
 
 public class PostRepository : IRepository<Post, long>
 {
@@ -15,9 +15,16 @@ public class PostRepository : IRepository<Post, long>
         _dbContext = dbContext;
     }
 
-    public Task<Post?> CreateAsync(Post t)
+    public async Task<List<Post>> GetAsync(int pageCount, int pageSize)
     {
-        throw new NotImplementedException();
+        return await _dbContext.Posts.ToListAsync();
+    }
+
+    public async Task<Post?> CreateAsync(Post t)
+    {
+        _dbContext.Posts.Add(t);
+        await _dbContext.SaveChangesAsync();
+        return t; 
     }
 
     public Task<bool> DeleteAsync(long id)
@@ -26,11 +33,6 @@ public class PostRepository : IRepository<Post, long>
     }
 
     public Task<Post?> GetAsync(long id)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<List<Post>> GetAsync(int pageCount, int pageSize)
     {
         throw new NotImplementedException();
     }

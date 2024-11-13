@@ -8,10 +8,10 @@ namespace BlogApi.Controllers;
 [ApiController]
 public class PostController : ControllerBase
 {
-    private readonly ILogger _logger;
+    private readonly ILogger<PostController> _logger;
     private readonly IPostService _service;
 
-    public PostController(ILogger logger, IPostService service)
+    public PostController(ILogger<PostController> logger, IPostService service)
     {
         _logger = logger;
         _service = service;

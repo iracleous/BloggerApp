@@ -43,10 +43,10 @@ public class PostRequestDto
 
 public class PostResponseDto
 {
-    public long Id { get; set; }
-    public string Title { get; set; } = string.Empty;
-    public long AuthorId { get; set; }
-    public string AuthorName { get; set; } = string.Empty;
-    public long BlogId { get; set; }
-    public string BlogTitle { get; set; } = string.Empty;
+    public long? Id { get; set; }
+    public string? Title { get; set; } = string.Empty;
+    public long? AuthorId { get; set; }
+    public string? AuthorName { get; set; } = string.Empty;
+    public long? BlogId { get; set; }
+    public string? BlogTitle { get; set; } = string.Empty;
 }
