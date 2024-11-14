@@ -17,7 +17,10 @@ public class PostRepository : IRepository<Post, long>
 
     public async Task<List<Post>> GetAsync(int pageCount, int pageSize)
     {
-        return await _dbContext.Posts.ToListAsync();
+        return await _dbContext
+            .Posts
+            .Include(post => post.Blog!.Author )
+            .ToListAsync();
     }
 
     public async Task<Post?> CreateAsync(Post t)

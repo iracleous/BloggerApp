@@ -28,6 +28,10 @@ public class PostService : IPostService
         return new PostResponseDto { 
             Id=postdb?.Id, 
             Title=postdb?.Title,
+            AuthorId=postdb?.Blog?.AuthorId,
+            AuthorName=postdb?.Blog?.Author?.Name,
+            BlogId = postdb?.BlogId,
+            BlogTitle = postdb?.Blog?.Name,
         };
     }
 

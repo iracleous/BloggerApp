@@ -38,6 +38,8 @@ public abstract class MessageDecorator : IMessage
         _message = message;
     }
 
+    public abstract void Test();
+
     public virtual string GetContent()
     {
         return _message.GetContent();
@@ -57,6 +59,11 @@ public class EncryptedMessage : MessageDecorator
         Array.Reverse(charArray);
         return new string(charArray);
     }
+
+    public override void Test()
+    {
+        throw new NotImplementedException();
+    }
 }
 
 public class CompressedMessage : MessageDecorator
@@ -67,5 +74,10 @@ public class CompressedMessage : MessageDecorator
     {
         // Simulate compression by converting to uppercase
         return _message.GetContent().ToUpper();
+    }
+
+    public override void Test()
+    {
+        throw new NotImplementedException();
     }
 }
