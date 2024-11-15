@@ -30,7 +30,7 @@ public class BlogResponseDto
 {
     public long Id { get; set; }
     public string Name { get; set; } = string.Empty;
-    public long AuthorId { get; set; }
+    public long? AuthorId { get; set; }
     public string AuthorName { get; set; } = string.Empty;
 }
 

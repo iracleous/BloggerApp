@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using BlogDomain.Context;
 using BlogDomain.Models;
+using BlogDomain.Dtos;
 
 namespace BlogApi.Controllers
 {
@@ -23,14 +24,24 @@ namespace BlogApi.Controllers
 
         // GET: api/Blogs
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Blog>>> GetBlogs()
+        public async Task<ActionResult<IEnumerable<BlogResponseDto>>> GetBlogs()
         {
-            return await _context.Blogs.ToListAsync();
+            return await _context
+                .Blogs
+                .Select(blog => new BlogResponseDto
+                {
+                     AuthorId = blog.AuthorId,
+                      AuthorName =blog!.Author!.Name,
+                       Id =blog.Id,
+                        Name = blog.Name
+
+                })
+                .ToListAsync();
         }
 
         // GET: api/Blogs/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Blog>> GetBlog(long id)
+        public async Task<ActionResult<BlogResponseDto>> GetBlog(long id)
         {
             var blog = await _context.Blogs.FindAsync(id);
 
@@ -39,7 +50,13 @@ namespace BlogApi.Controllers
                 return NotFound();
             }
 
-            return blog;
+            return new BlogResponseDto
+            {
+                AuthorId = blog.AuthorId,
+                AuthorName = blog!.Author!.Name,
+                Id = blog.Id,
+                Name = blog.Name
+            };
         }
 
         // PUT: api/Blogs/5
@@ -76,12 +93,18 @@ namespace BlogApi.Controllers
         // POST: api/Blogs
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Blog>> PostBlog(Blog blog)
+        public async Task<ActionResult<BlogResponseDto>> PostBlog(Blog blog)
         {
             _context.Blogs.Add(blog);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetBlog", new { id = blog.Id }, blog);
+            return new BlogResponseDto
+            {
+                AuthorId = blog.AuthorId,
+           //     AuthorName = blog!.Author!.Name,
+                Id = blog.Id,
+                Name = blog.Name
+            };
         }
 
         // DELETE: api/Blogs/5

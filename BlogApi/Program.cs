@@ -26,6 +26,20 @@ builder.Services.AddDbContext<BlogDbContext>(options =>
 builder.Services.AddScoped<IPostService, PostService>();
 builder.Services.AddScoped<IRepository<Post,long>, PostRepository>();
 
+//cors 1/3 
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+//cors 2/3 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: MyAllowSpecificOrigins,
+                      policy =>
+                      {
+                          policy.WithOrigins("http://localhost:51133/")
+                                 .AllowAnyHeader()
+                                 .AllowAnyMethod();
+                      });
+});
+
 
 var app = builder.Build();
 
@@ -41,5 +55,10 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+
+//cors 3/3
+app.UseCors(MyAllowSpecificOrigins);
+
 
 app.Run();

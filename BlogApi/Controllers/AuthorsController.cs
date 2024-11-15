@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using BlogDomain.Context;
 using BlogDomain.Models;
+using BlogDomain.Dtos;
 
 namespace BlogApi.Controllers
 {
@@ -23,17 +24,23 @@ namespace BlogApi.Controllers
 
         // GET: api/Authors
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Author>>> GetAuthors()
+        public async Task<ActionResult<IEnumerable<AuthorResponseDto>>> GetAuthors()
         {
             return await _context
                 .Authors
                 .Include(author => author.Blogs)
+                .Select(author => new AuthorResponseDto
+                {
+                     Email=author.Email,
+                     Id = author.Id,
+                     Name = author.Name
+                })
                 .ToListAsync();
         }
 
         // GET: api/Authors/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Author>> GetAuthor(long id)
+        public async Task<ActionResult<AuthorResponseDto>> GetAuthor(long id)
         {
             var author = await _context.Authors.FindAsync(id);
 
@@ -42,7 +49,12 @@ namespace BlogApi.Controllers
                 return NotFound();
             }
 
-            return author;
+            return new AuthorResponseDto
+            {
+                Email = author.Email,
+                Id = author.Id,
+                Name = author.Name
+            };
         }
 
         // PUT: api/Authors/5
@@ -79,12 +91,17 @@ namespace BlogApi.Controllers
         // POST: api/Authors
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Author>> PostAuthor(Author author)
+        public async Task<ActionResult<AuthorResponseDto>> PostAuthor(Author author)
         {
             _context.Authors.Add(author);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetAuthor", new { id = author.Id }, author);
+            return new AuthorResponseDto
+            {
+                Email = author.Email,
+                Id = author.Id,
+                Name = author.Name
+            };
         }
 
         // DELETE: api/Authors/5
