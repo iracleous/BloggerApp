@@ -1,0 +1,16 @@
+﻿GET https://localhost:7147/api/Authors
+
+(response)
+{
+  "id": 10002,
+  "name": "string",
+  "email": "string"
+}
+
+GET https://localhost:7147/api/Authors/{id}
+POST https://localhost:7147/api/Authors   
+(request)
+			{
+			  "name": "string",
+			  "email": "string"
+			}
