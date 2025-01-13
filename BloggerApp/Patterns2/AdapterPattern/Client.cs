@@ -8,7 +8,7 @@ namespace BlogDomain.Patterns2.AdapterPattern;
 
 public static class Client
 {
-    public static void Main()
+    public static void AnotherMain()
     {
         // Use the Adapter to connect to the ThirdPartyService
         ThirdPartyService thirdPartyService = new ThirdPartyService();

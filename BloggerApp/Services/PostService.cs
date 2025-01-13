@@ -19,12 +19,19 @@ public class PostService : IPostService
 
     public async Task<PostResponseDto?> CreatePostAsync(PostRequestDto post)
     {
-         Post? postdb =     await _postRepository.CreateAsync(new Post { 
+
+        if (post.Title == null)
+            return null;
+        if (post.Title.Contains ("Bad Word"))
+            return null;
+
+        Post? postdb =     await _postRepository.CreateAsync(new Post { 
              Created=DateTime.Now, 
              Title= post.Title,
              BlogId=post.BlogId,
              Description=post.Description ,
          });
+
         return new PostResponseDto { 
             Id=postdb?.Id, 
             Title=postdb?.Title,
