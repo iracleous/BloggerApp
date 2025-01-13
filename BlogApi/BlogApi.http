@@ -1,29 +1,27 @@
 @BlogApi_HostAddress = https://localhost:7147
 
-GET {{BlogApi_HostAddress}}/api/Posts?pageCount=1&pageSize=1
+GET {{BlogApi_HostAddress}}/api/Post?pageCount=1&pageSize=1
 Accept: application/json
 
 ###
 
-POST {{BlogApi_HostAddress}}/api/Posts/
+POST {{BlogApi_HostAddress}}/api/Post/
 Content-Type: application/json
 
 {
   "title": "eimai sti Magoula",
   "description": "string",
-  "content": "string",
-  "created": "2024-11-08T09:51:45.020Z",
-  "updated": "2024-11-08T09:51:45.020Z"
+  "blogId": 1 
 }
 
 ###
 
-GET {{BlogApi_HostAddress}}/api/Posts/1
+GET {{BlogApi_HostAddress}}/api/Post/1
 Accept: application/json
 
 ###
 
-DELETE {{BlogApi_HostAddress}}/api/Posts/1
+DELETE {{BlogApi_HostAddress}}/api/Post/1
 Accept: application/json
 
 ###

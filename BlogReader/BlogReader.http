@@ -1,6 +1,6 @@
-@BlogReader_HostAddress = http://localhost:5018
+@BlogReader_HostAddress = https://localhost:7286
 
-GET {{BlogReader_HostAddress}}/weatherforecast/
+GET {{BlogReader_HostAddress}}/api/Blog/
 Accept: application/json
 
 ###

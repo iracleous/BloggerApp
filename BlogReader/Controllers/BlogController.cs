@@ -24,8 +24,8 @@ public class BlogController : ControllerBase
     {
         string url = $"https://localhost:7147/api/post";
         HttpResponseMessage httpMessage = await _httpClient.GetAsync(url);
-     httpMessage.EnsureSuccessStatusCode();
-     string responseBody = await httpMessage.Content.ReadAsStringAsync();
+         httpMessage.EnsureSuccessStatusCode();
+         string responseBody = await httpMessage.Content.ReadAsStringAsync();
 
         var options = new JsonSerializerOptions
         {
@@ -44,7 +44,11 @@ public class BlogController : ControllerBase
         HttpResponseMessage httpMessage = await _httpClient.PostAsJsonAsync(url, post);
         httpMessage.EnsureSuccessStatusCode();
         string responseBody = await httpMessage.Content.ReadAsStringAsync();
-        Post? posted = JsonSerializer.Deserialize<Post>(responseBody);
+        var options = new JsonSerializerOptions
+        {
+            PropertyNameCaseInsensitive = true
+        };
+        PostResponseDto? posted = JsonSerializer.Deserialize<PostResponseDto>(responseBody,options);
         return Ok(posted);
     }
 
